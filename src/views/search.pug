@@ -1,0 +1,12 @@
+extends ./base.pug
+include ./mixins/videoBlock.pug
+
+block content 
+    form(method="get").search__form
+        input(type="text", name="keyword")
+        input(type="submit", value="Search now")
+    div.video-grid
+        each video in videos
+            +videoBlock(video)
+        else
+            span.empty__message No videos found

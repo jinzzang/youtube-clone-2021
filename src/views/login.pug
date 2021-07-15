@@ -1,0 +1,16 @@
+extends ./base.pug
+
+block content 
+    h3=errorMessage
+    form(method="post") 
+        input(name="email",type="email",required,placeholder="email")
+        input(name="password",type="password",required,placeholder="password")
+        input(type="submit", value="Login")
+        include ./partials/social-login.pug
+    div.auth-switch
+        span already id does`nt exist?
+        a(href="/join")    Join &rarr;
+
+
+
+
