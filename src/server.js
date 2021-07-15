@@ -5,6 +5,7 @@ import MongoStore from "connect-mongo";
 import rootRouter from "./router/rootRouter";
 import userRouter from "./router/userRouter";
 import videoRouter from "./router/videoRouter";
+import flash from "express-flash";
 import "./db";
 import "./models/Video";
 import { localsMiddleware } from "./localsMiddleware";
@@ -15,9 +16,7 @@ import apiRouter from "./apiRouter";
 const app = express();
 
 app.use(morgan("dev"));
-
-
-
+app.use(flash());
 app.set("view engine", "pug");
 app.set("views", process.cwd() + '/src/views');
 app.use(express.urlencoded({ extended: true }));

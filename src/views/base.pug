@@ -1,3 +1,5 @@
+include mixins/message
+
 doctype html
 html
     head
@@ -6,6 +8,8 @@ html
         link(rel="stylesheet", href="static/css/styles.css")
         link(rel="icon" type="image/png" href="http://example.com/myicon.png")
     body
+        if messages.error
+            +mssageBlock("error",messages.error)
         include partials/header.pug
         main
             block content

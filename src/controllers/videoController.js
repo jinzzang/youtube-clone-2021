@@ -38,6 +38,7 @@ export const getEdit = async (req, res) => {
         return res.status(404).render("404", { pageTitle: "Video not found." });
     }
     if (String(video.owner._id) !== String(_id)) {
+        req.flash("error", "업로더와 다른 사람입니다.");
         return res.status(403).redirect('/');
     }
     return res.render("edit", { pageTitle: `Editing: ${video.title}`, video });
@@ -53,6 +54,7 @@ export const postEdit = async (req, res) => {
         return res.status(404).render("404", { errorMessage: "Video Not Found" });
     }
     if (String(video.owner._id) !== String(_id)) {
+        req.flash("error", "업로더와 다른 사람입니다.");
         return res.status(403).redirect('/');
     }
     await Video.findByIdAndUpdate(id, {
@@ -60,6 +62,7 @@ export const postEdit = async (req, res) => {
         description,
         hashtags: Video.formatHashtags(hashtags)
     })
+    req.flash("error", "수정 성공!");
     return res.redirect(`/videos/${id}`);
 }
 
@@ -94,6 +97,7 @@ export const deleteVideo = async (req, res) => {
         return res.status(403).redirect('/');
     }
     await Video.findByIdAndDelete(id);
+    req.flash("error", "삭제 성공!");
     res.redirect('/');
 }
 

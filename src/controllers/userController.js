@@ -24,7 +24,7 @@ export const postEdit = async (req, res) => {
     }, { new: true });
 
     req.session.user = updatedUser;
-
+    req.flash("error", "성공!");
     return res.redirect("/users/edit-profile");
 }
 
@@ -167,6 +167,7 @@ export const postChangePassword = async (req, res) => {
     }
     user.password = newPassword1;
     await user.save();
+    req.flash("error", "성공!");
     return res.redirect('/users/logout');
 
 
