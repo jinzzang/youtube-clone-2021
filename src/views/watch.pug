@@ -21,17 +21,30 @@ block content
             div
                 span#fullScreen
                     i.fas.fa-expand
-
-    //
-        div
-            h4=video.description
-            small=video.createAt
-        div 
-            small Uploaded By
-                a(href=`/users/${video.owner._id}`) #{video.owner.username}
+            
+    div.video__data
+        p.video__title=video.title
+        small.video__owner Uploaded By
+            a(href=`/users/${video.owner._id}`) #{video.owner.username}
+        small.video__createdAt=new Date(video.createAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
         if String(video.owner._id) === String(loggedInUser._id)
             a(href=`${video.id}/edit`) Edit Video &rarr;
             br
             a(href=`${video.id}/delete`) Delete Video &rarr;  
+    if loggedIn 
+        .video__add-comments
+            form.video__comment-form#commentForm
+                textarea(cols="30", rows="10",placeholer="Write a nice comment")
+                button Add comment
+    .video__comments
+        ul
+            each comment in video.comments.reverse()
+                li.video__comment(data-id=comment._id)
+                    i.fas.fa-comment
+                    span  #{comment.text}
+                    if String(video.owner._id) === String(loggedInUser._id)
+                        span.comment-delete ❌
 block scripts
     script(src="/static/js/videoPlayer.js")
+    if loggedIn
+    script(src="/static/js/commentSection.js") 

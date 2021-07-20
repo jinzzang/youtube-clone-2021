@@ -6,8 +6,6 @@ import rootRouter from "./router/rootRouter";
 import userRouter from "./router/userRouter";
 import videoRouter from "./router/videoRouter";
 import flash from "express-flash";
-import "./db";
-import "./models/Video";
 import { localsMiddleware } from "./localsMiddleware";
 import apiRouter from "./apiRouter";
 
@@ -20,6 +18,7 @@ app.use(flash());
 app.set("view engine", "pug");
 app.set("views", process.cwd() + '/src/views');
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(session({
     secret: process.env.SECRET,
     resave: false,
@@ -33,9 +32,9 @@ app.use('/upload', express.static('upload'));
 app.use('/static', express.static('assets'));
 app.use('/users/static', express.static('assets'));
 app.use('/videos/static', express.static('assets'));
+app.use('/api', apiRouter);
 app.use('/users', userRouter);
 app.use('/videos', videoRouter);
-app.use('/api', apiRouter);
 
 export default app;
 
