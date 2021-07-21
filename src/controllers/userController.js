@@ -102,18 +102,16 @@ export const finishGithub = async (req, res) => {
             'Accept': "application/json"
         }
     })).json();
-    const apiUrl = "https://api.github.com";
     if ("access_token" in tokenRequest) {
         const accessToken = tokenRequest.access_token;
+        const apiUrl = "https://api.github.com";
         const userData = await (await fetch(`${apiUrl}/user`, {
-            method: "GET",
             headers: {
                 "Authorization": `token ${accessToken}`
             }
         })).json();
 
         const emailData = await (await fetch(`${apiUrl}/user/emails`, {
-            method: "GET",
             headers: {
                 "Authorization": `token ${accessToken}`
             }
@@ -124,8 +122,9 @@ export const finishGithub = async (req, res) => {
         }
         let user = await User.findOne({ email: emailObj.email });
         if (!user) {
-            const user = await User.create({
+            user = await User.create({
                 name: userData.name,
+                avatarUrl: userData.avatar_url,
                 username: userData.login,
                 email: emailObj.email,
                 password: "",
