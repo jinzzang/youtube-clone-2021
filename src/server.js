@@ -23,7 +23,7 @@ app.use(session({
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: `mongodb://127.0.0.1:27017/wetube` })
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URL })
 }));
 app.use(localsMiddleware);
 
