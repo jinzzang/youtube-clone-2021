@@ -13,6 +13,8 @@ import apiRouter from "./apiRouter";
 
 const app = express();
 
+console.log(process.env.MONGODB_URL);
+
 app.use(morgan("dev"));
 app.use(flash());
 app.set("view engine", "pug");
