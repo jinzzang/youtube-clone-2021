@@ -117,4 +117,7 @@ dist
 
 #upload
 /upload
+
+#assets
 /assets
+/build

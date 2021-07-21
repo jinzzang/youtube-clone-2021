@@ -11,13 +11,11 @@ module.exports = {
         recorder: BASE_JS + "/recorder.js",
         commentSection: "./src/client/js/commentSection.js"
     },
-    watch: true,
     output: {
         filename: "js/[name].js",
         path: path.resolve(__dirname, "assets"),
         clean: true,
     },
-    mode: "development",
     module: {
         rules: [
             {

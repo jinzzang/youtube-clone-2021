@@ -4,6 +4,10 @@
         border-radius: 7px;
         width:100%;
         background-color: ivory;
+        & img{
+            background-size:cover;
+    background-position:center;
+        }
     }
     .video-mixin__data{
         padding:0px 15px;

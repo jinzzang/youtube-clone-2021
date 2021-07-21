@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const videoSchema = new mongoose.Schema({
     title: String,
-    description: String,
+    description: { type: String, trim: true, minLength: 1 },
     createAt: { type: Date, default: Date.now },
     hashtags: [{ type: String }],
     meta: {
@@ -17,7 +17,11 @@ const videoSchema = new mongoose.Schema({
     },
     comments: [{
         type: mongoose.Schema.Types.ObjectId, ref: "Comment"
-    }]
+    }],
+    thumbUrl: {
+        type: String,
+        required: true
+    }
 });
 
 videoSchema.static("formatHashtags", (hashtags) => {

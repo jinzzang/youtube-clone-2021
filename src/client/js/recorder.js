@@ -23,6 +23,7 @@ const handleDownload = async () => {
         "1",
         "thumbnail.jpg"
     );
+    console.log(videoFile);
 
     const mp4File = ffmpeg.FS("readFile", "output.mp4");
     const thumbFile = ffmpeg.FS("readFile", "thumbnail.jpg");

@@ -6,6 +6,7 @@ import Video from "../models/Video";
 export const home = async (req, res) => {
     try {
         const videos = await Video.find({}).sort({ createAt: 'desc' }).populate("owner");
+        console.log(videos);
         res.render("home", { pageTitle: "home", videos });
     } catch (error) {
         console.log(error);
@@ -70,17 +71,19 @@ export const postEdit = async (req, res) => {
 export const getUpload = (req, res) => res.render("upload", { pageTitle: "Upload" });
 export const postUpload = async (req, res) => {
     const { title, description, hashtags } = req.body;
-    const { file } = req;
+    const { video, thumb } = req.files;
     const { user: { _id } } = req.session;
     const user = await User.findById({ _id });
     try {
         const newVideo = await Video.create({
-            fileUrl: file.path,
+            fileUrl: video[0].path,
+            thumbUrl: thumb[0].path,
             owner: _id,
             title,
             description,
-            hashtags: Video.formatHashtags(hashtags),
+            hashtags: Video.formatHashtags(hashtags)
         });
+        console.log(newVideo.thumbUrl);
         user.videos.push(newVideo._id);
         user.save();
         return res.redirect('/');
