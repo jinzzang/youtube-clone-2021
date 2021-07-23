@@ -15,9 +15,10 @@ export const postEdit = async (req, res) => {
     }, session: {
         user: { _id }
     }, file } = req;
+    console.log(file);
 
     const updatedUser = await User.findByIdAndUpdate(_id, {
-        avatarUrl: file ? file.path : user.avatarUrl,
+        avatarUrl: file ? file.location : user.avatarUrl,
         email,
         username,
         name: name
@@ -93,7 +94,6 @@ export const finishGithub = async (req, res) => {
         client_secret: process.env.GH_SECRET,
         code: req.query.code
     }
-
     const encodingConfig = new URLSearchParams(config);
     const finalUrl = `${baseUrl}?${encodingConfig}`;
     const tokenRequest = await (await fetch(finalUrl, {
@@ -120,6 +120,7 @@ export const finishGithub = async (req, res) => {
         if (!emailObj) {
             return res.redirect("/login");
         }
+        console.log(userData, emailData);
         let user = await User.findOne({ email: emailObj.email });
         if (!user) {
             user = await User.create({
