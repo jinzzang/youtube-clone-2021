@@ -1,15 +1,21 @@
+#Program Stacks
 
-/login
-/join
-/search
+##Client
+frontend technologies used in this project:
 
-/user/:id
-/user/:id/edit
-/user/:id/logout
-/user/:id/delete
-
-/video/:id
-/video/:id/edit
-/video/:id/delete
++ HTML
++ CSS
++ Javascript
++ Sass
++ Pug
 
 
+##Server
+backend technologies used in this project:
++ Node.js
++ Express
++ MongoDB
+
+##Production
++ Heroku
++ Aws(VideoData,ImgData)
