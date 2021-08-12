@@ -21,4 +21,4 @@ backend technologies used in this project:
 + Aws(VideoData,ImgData)
 
 ##URL
-+ https://wetube-clone-2021.herokuapp.com/
++ https://cloning-youtube.herokuapp.com/
